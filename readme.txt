@@ -34,9 +34,9 @@ The following components have been included:
     6) "Event Bus" service is what makes the entire micro service asynchronous
         communication possible as its purpose is to route all incoming events as 
         outgoing events to the various services to keep them informed of the state 
-        of the date at any given time. In this proof of concept application, the
+        of the data at any given time. In this proof of concept application, the
         "Event Bus" has been implemented using "node.js" JavaScript code just like
-        all the other services which make up the suite of micro services. however
+        all the other services which make up the suite of micro services. However
         if this was an actual production system, a commercially available equivalent
         tool such as RabbitMQ or Kafka could be used instead.
 
@@ -99,14 +99,17 @@ The workflow of events while creating a new Comments is the following:
 This solution may appear to be complex at times with duplicated event handling occuring
 and yes, there is a level of complexity and duplication going on. But what makes this
 solution viable is the asynchronos nature. Yes the failure of one service will cause a
-diruption of normal service to the application as a whole, but the failure will not bring 
+disruption of normal service to the application as a whole, but the failure will not bring 
 the application to its knees and once the failed services are restored, the system is 
 able to recover on its own. Example: one of the tasks the "Query" service does when it
 is being restarted is to ask the "Event Bus" for any events that the "Event Bus" might
 have received while the "Query" service was down and since it is the "Query" service
 that the React client relies on to serve up all available Blog Posts and associated
 Comments, restoration of the "Query" service does allow the React client to re-render
-all its data reliably. The only service that is really critical, is the "Event Bus".
+all its data reliably. The only real critical "cannot work with out it" service, is 
+the "Event Bus". If the "Event Bus" does go down then the system cannot function as a
+whole. But as mentioned earlier, in a production environment, an existing tried and 
+trusted external tool such as RabbitMQ, Kafka or some other provider would be used.
 
 To run this proof of concept application, first one must have "node.js" installed on
 their system. Once it is installed you can do the following:
@@ -127,9 +130,15 @@ their system. Once it is installed you can do the following:
           Port: 4003 - Moderation Service
           Port: 4005 - Event Bus
 
+It should also be noted that when the React client is started, your default Browser 
+should launch by itself navigating to the React client's home page. However if this
+does not happen, you should be able to open up a browser tab on "https://localhost:3000".
+The React client was tested using Chrome version "84.0.x", but you should be able to
+use most other browsers, except well perhaps not the infamous Internet Exploder.
+
 Finally, I must give credit to Stephen Grider as it was his excellent instruction on
 the topic which has allowed myself to become familiar with learning how micro services
-can be used reliably and efficiently used with each other. This is only a proof on 
+can be used reliably and efficiently used with each other. This is only a proof of 
 concept project. But a full stack implementation is in the works and it will be shared 
 when the time is right and it will be at that time when the deployment inside of Docker
 and Kubernetes containers will be utilized. Thank you and once again none of this would
