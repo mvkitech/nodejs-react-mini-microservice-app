@@ -15,7 +15,7 @@ The following components have been included:
         each new Blog Post or Comment is created. The focus of this proof of
         concept project was on delivering a robust micro services architecture
         and less on the React UI screens. Fixing this behavior of the client will
-        be looked into as time dictates.
+        be looked into as time allows.
 
     2) "Posts" service exists to manage all new Blog Post requests events coming
         from the React client. 
@@ -29,16 +29,16 @@ The following components have been included:
     5) "Moderation" service is used to moderate every Comment to determine whether
         or not the status of a given Comment has been approved or rejected. Presently
         this proof of comments application does not like "Clowns", so any Comments
-        that have a "clown" embedded in the Comment will be rejected. 
+        that have a "clown" embedded in the Comment content will be rejected. 
 
     6) "Event Bus" service is what makes the entire micro service asynchronous
-        communication possible as its purpose is to route all incoming events as 
-        outgoing events to the various services to keep them informed of the state 
-        of the data at any given time. In this proof of concept application, the
-        "Event Bus" has been implemented using "node.js" JavaScript code just like
-        all the other services which make up the suite of micro services. However
-        if this was an actual production system, a commercially available equivalent
-        tool such as RabbitMQ or Kafka could be used instead.
+        communication possible as its purpose is to receive all incoming events and
+        route these events as outgoing events to the various services to keep them 
+        informed of the state of the data at any given time. In this proof of concept 
+        application, the "Event Bus" has been implemented using "node.js" JavaScript 
+        code just like all the other services which make up the suite of micro services. 
+        However if this was an actual production system, a commercially available tool 
+        such as RabbitMQ or Kafka could be used instead.
 
 The workflow of events while creating a new Blog Post is the following:
 
