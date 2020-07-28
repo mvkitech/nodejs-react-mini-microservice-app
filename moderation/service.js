@@ -11,9 +11,10 @@ app.use(bodyParser.json());
 app.post('/events', async (req, res) => {
   const { type, data } = req.body;
 
-  // Possibly reject all comments related to clowns ... LOL  
   if (type === 'CommentCreated') {
-    const status = data.content.includes('clowns') ? 'rejected' : 'approved';
+	  
+	// Possibly reject all comments related to clowns ... LOL
+    const status = data.content.toLowerCase().includes('clown') ? 'rejected' : 'approved';
 
     // Send a 'Comment Moderated' status event to 'Event Bus'
     await axios.post('http://localhost:4005/events', {
