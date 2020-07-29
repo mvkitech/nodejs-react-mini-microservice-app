@@ -10,4 +10,4 @@ RUN npm install
 COPY ./ ./
 
 # Setup default command when container is run
-CMD ["npm", "start"]
+CMD ["node", "start"]
